@@ -641,6 +641,23 @@ const MessageActions: React.FC<{
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       content += `ANSWER:\n${answerText}\n\n`;
 
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        content += 'TABLES:\n';
+        message.response.tables.forEach(table => {
+          content += `\n${table.title}:\n`;
+          if (table.headers && table.headers.length > 0) {
+            content += table.headers.join(' | ') + '\n';
+            content += table.headers.map(() => '---').join(' | ') + '\n';
+          }
+          table.rows.forEach(row => {
+            content += row.join(' | ') + '\n';
+          });
+          content += '\n';
+        });
+        content += '\n';
+      }
+
       // Add related content images if available
       if (message.response?.related_content && message.response.related_content.length > 0) {
         content += 'RELATED IMAGES:\n';
@@ -701,6 +718,22 @@ const MessageActions: React.FC<{
 
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       markdown += `## Answer\n\n${answerText}\n\n`;
+
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        markdown += '## Tables\n\n';
+        message.response.tables.forEach(table => {
+          markdown += `### ${table.title}\n\n`;
+          if (table.headers && table.headers.length > 0) {
+            markdown += '| ' + table.headers.join(' | ') + ' |\n';
+            markdown += '|' + table.headers.map(() => ' --- ').join('|') + '|\n';
+          }
+          table.rows.forEach(row => {
+            markdown += '| ' + row.join(' | ') + ' |\n';
+          });
+          markdown += '\n';
+        });
+      }
 
       // Add related content images
       if (message.response?.related_content && message.response.related_content.length > 0) {
@@ -782,6 +815,32 @@ const MessageActions: React.FC<{
 
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       htmlContent += `<div class="content"><h2>Answer</h2><p>${answerText}</p></div>`;
+
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        htmlContent += '<div class="tables"><h2>Tables</h2>';
+        message.response.tables.forEach(table => {
+          htmlContent += `<h3>${table.title}</h3>`;
+          htmlContent += '<table style="width: 100%; border-collapse: collapse; margin: 10px 0; border: 1px solid #e5e7eb;">';
+          if (table.headers && table.headers.length > 0) {
+            htmlContent += '<thead style="background-color: #f3f4f6;"><tr>';
+            table.headers.forEach(header => {
+              htmlContent += `<th style="padding: 8px; border: 1px solid #e5e7eb; text-align: left;">${header}</th>`;
+            });
+            htmlContent += '</tr></thead>';
+          }
+          htmlContent += '<tbody>';
+          table.rows.forEach(row => {
+            htmlContent += '<tr>';
+            row.forEach(cell => {
+              htmlContent += `<td style="padding: 8px; border: 1px solid #e5e7eb;">${cell}</td>`;
+            });
+            htmlContent += '</tr>';
+          });
+          htmlContent += '</tbody></table>';
+        });
+        htmlContent += '</div>';
+      }
 
       // Add related content images
       if (message.response?.related_content && message.response.related_content.length > 0) {
