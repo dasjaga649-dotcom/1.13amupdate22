@@ -106,6 +106,42 @@ const getFallbackResponse = (query: string): BotResponse => {
     };
   }
 
+  if (queryLower.includes('stats') || queryLower.includes('statistic') || queryLower.includes('impressive')) {
+    return {
+      answer: "**Impressive Hutech Solutions Statistics:**\n\n📊 **500+** Projects Delivered Successfully\n🌐 **50+** Countries Served Globally\n👥 **200+** Expert Professionals\n⭐ **98%** Client Satisfaction Rate\n🏆 **CMMI Level 3** Certified Organization\n💼 **10+** Years of Industry Experience\n🚀 **24/7** Technical Support\n\nOur commitment to excellence drives these outstanding results, making us a trusted technology partner worldwide.",
+      related_content: [
+        {
+          title: "About Hutech Solutions",
+          url: "https://hutechsolutions.com/about",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What certifications do we have?",
+        "What services do we provide?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('certification') || queryLower.includes('certified') || queryLower.includes('cmmi')) {
+    return {
+      answer: "**Hutech Solutions Certifications & Qualifications:**\n\n🏆 **CMMI Level 3** - Capability Maturity Model Integration\n🔒 **ISO 27001** - Information Security Management\n✅ **ISO 9001** - Quality Management Systems\n☁️ **AWS Certified** - Cloud Solutions Architecture\n🔵 **Microsoft Certified** - Azure Solutions\n📊 **Google Cloud** - Professional Cloud Architect\n🛡️ **Cybersecurity** - Multiple security certifications\n\nThese certifications demonstrate our commitment to quality, security, and best practices in software development and IT services.",
+      related_content: [
+        {
+          title: "Hutech Solutions Certifications",
+          url: "https://hutechsolutions.com/certifications",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/cmmi-level3-logo.svg"
+        }
+      ],
+      recommendations: [
+        "What are some impressive stats about Hutech?",
+        "What is our tech stack?",
+        "What services do we provide?"
+      ]
+    };
+  }
+
   // Default response
   return {
     answer: `Thank you for your question about "${query}". \n\nI'm currently running in demo mode without a backend connection. For detailed information about Hutech Solutions, please visit our website at https://hutechsolutions.com or contact us directly.\n\n**Hutech Solutions** specializes in connecting people and technology through innovative IT services, digital transformation, and custom software development.`,
