@@ -170,7 +170,7 @@
 
 /* Smooth search input focus animation during transition */
 .client-page.transitioning .client-search-input {
-  animation: searchInputGlow 1.2s ease-out;
+  animation: searchInputGlow 0.8s ease-out;
 }
 
 @keyframes searchInputGlow {
