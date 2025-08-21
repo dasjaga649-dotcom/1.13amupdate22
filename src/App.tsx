@@ -928,7 +928,8 @@ const MessageActions: React.FC<{
           htmlContent += '<div class="images"><h2>Related Images</h2>';
           itemsWithImages.forEach(item => {
             htmlContent += `<h3>${item.title}</h3>`;
-            htmlContent += `<img src="${item.image}" alt="${item.title}">`;
+            const imageUrl = item.image && item.image !== "No image found." ? item.image : 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
+            htmlContent += `<img src="${imageUrl}" alt="${item.title}" onerror="this.src='https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg'">`;
           });
           htmlContent += '</div>';
         }
