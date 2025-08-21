@@ -195,7 +195,7 @@
 
 /* Enhance button animation during transition */
 .client-page.transitioning .search-send-button {
-  animation: buttonPulse 1.2s ease-out;
+  animation: buttonPulse 0.8s ease-out;
 }
 
 @keyframes buttonPulse {
