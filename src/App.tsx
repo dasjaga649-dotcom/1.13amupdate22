@@ -144,7 +144,7 @@ function App() {
       category: 'Services'
     },
     {
-      icon: '���',
+      icon: '��',
       title: 'Industries',
       description: 'What industries do we serve?',
       category: 'Industries'
@@ -286,6 +286,8 @@ function App() {
     setCurrentPage('client');
     setInputValue('');
     setShowMenu(false);
+    setScrollTriggered(false);
+    setSearchInitiated(false);
   };
 
   if (currentPage === 'client') {
