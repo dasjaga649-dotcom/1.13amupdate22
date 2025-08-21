@@ -1033,11 +1033,12 @@ const BotMessage: React.FC<{
   onSuggestionClick: (suggestion: string) => void;
 }> = ({ message, onSuggestionClick }) => {
   const response = message.response;
+  const isWelcomeMessage = message.id === 1 && message.text === "Hello! I am your AI partner, Husqy. How can I help you today?";
 
   return (
     <div className="flex items-start justify-center">
       <div className="max-w-3xl w-full">
-        
+
         {/* Related Content Card Carousel */}
         {response?.related_content && response.related_content.length > 0 && (
           <RelatedContentCarousel items={response.related_content} />
@@ -1045,15 +1046,15 @@ const BotMessage: React.FC<{
 
         {/* Main Answer */}
         {message.text && (
-          <div className="p-4 rounded-xl prose text-gray-800">
+          <div className="p-4 rounded-xl prose text-gray-800 chat-message-content">
             <div dangerouslySetInnerHTML={{
               __html: marked(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || []))) as string
             }} />
           </div>
         )}
 
-        {/* Action Buttons */}
-        {message.text && (
+        {/* Action Buttons - Hide for welcome message */}
+        {message.text && !isWelcomeMessage && (
           <MessageActions message={message} />
         )}
 
