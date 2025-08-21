@@ -27,7 +27,7 @@
 }
 
 .client-page.transitioning .welcome-section {
-  animation: fadeOutUp 0.6s ease-out forwards;
+  animation: fadeOutUp 0.4s ease-out forwards;
 }
 
 .client-page.transitioning .client-search-container.search-moving {
