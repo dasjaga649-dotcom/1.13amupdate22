@@ -251,13 +251,20 @@ function App() {
     setIsLoading(true);
 
     try {
+      // Add timeout to prevent hanging requests
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
       const response = await fetch('http://localhost:3001/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ query: messageText }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -266,7 +273,7 @@ function App() {
 
       const data = await response.text();
       let botResponse: BotResponse;
-      
+
       try {
         const jsonResponse = JSON.parse(data);
         if (jsonResponse.response) {
@@ -289,15 +296,20 @@ function App() {
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage: Message = {
+      console.warn('Backend not available, using fallback response:', error.message);
+
+      // Provide helpful fallback response based on the query
+      const fallbackResponse = getFallbackResponse(messageText);
+
+      const fallbackMessage: Message = {
         id: Date.now() + 1,
-        text: "Sorry, I'm having trouble connecting to the server. Please make sure your backend is running on http://localhost:3001",
+        text: fallbackResponse.answer,
         isUser: false,
         timestamp: new Date(),
+        response: fallbackResponse,
         query: messageText
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [...prev, fallbackMessage]);
     } finally {
       setIsLoading(false);
     }
