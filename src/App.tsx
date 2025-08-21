@@ -144,7 +144,7 @@ function App() {
       category: 'Services'
     },
     {
-      icon: '��',
+      icon: '���',
       title: 'Industries',
       description: 'What industries do we serve?',
       category: 'Industries'
@@ -378,7 +378,7 @@ function App() {
 
   // Chat Page
   return (
-    <div className={`bg-white body ${searchInitiated ? 'page-transition-enter-active' : ''} ${isSearching ? 'chat-searching' : ''}`} id='body'>
+    <div className={`bg-white body ${searchInitiated && !scrollTriggered ? 'page-transition-enter-active' : ''} ${scrollTriggered ? 'page-transition-instant' : ''} ${isSearching ? 'chat-searching' : ''}`} id='body'>
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history-container">
         {messages.map((message) => (
