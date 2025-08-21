@@ -48,6 +48,54 @@ interface QuestionCard {
   category: string;
 }
 
+// Robust image component with fallback handling
+const ImageWithFallback: React.FC<{
+  src?: string;
+  alt: string;
+  className?: string;
+  fallbackSrc: string;
+  fallbackAlt: string;
+}> = ({ src, alt, className, fallbackSrc, fallbackAlt }) => {
+  const [imgSrc, setImgSrc] = useState<string>(src || fallbackSrc);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src || fallbackSrc);
+    setHasError(false);
+  }, [src, fallbackSrc]);
+
+  const handleError = () => {
+    if (!hasError && imgSrc !== fallbackSrc) {
+      setHasError(true);
+      setImgSrc(fallbackSrc);
+      // Only log if it's not already a fallback and not "No image found"
+      if (src && src !== "No image found." && !src.includes('hutech-logo')) {
+        console.warn('Image fallback applied for:', src);
+      }
+    }
+  };
+
+  // Don't render anything if no image available
+  if (!src || src === "No image found.") {
+    return (
+      <img
+        src={fallbackSrc}
+        alt={fallbackAlt}
+        className={className}
+      />
+    );
+  }
+
+  return (
+    <img
+      src={imgSrc}
+      alt={hasError ? fallbackAlt : alt}
+      className={className}
+      onError={handleError}
+    />
+  );
+};
+
 function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
