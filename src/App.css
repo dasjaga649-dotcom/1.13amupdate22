@@ -54,6 +54,49 @@
           /* Smaller text for chat */
         }
 
+        /* Enhanced chat message content formatting */
+        .chat-message-content {
+          white-space: pre-line;
+        }
+
+        .chat-message-content p {
+          margin-bottom: 1rem;
+          line-height: 1.7;
+        }
+
+        .chat-message-content p:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Better spacing for lists */
+        .chat-message-content ul,
+        .chat-message-content ol {
+          margin: 1rem 0;
+          padding-left: 1.5rem;
+        }
+
+        .chat-message-content li {
+          margin-bottom: 0.75rem;
+          line-height: 1.6;
+        }
+
+        .chat-message-content li:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Proper line break handling */
+        .chat-message-content br {
+          margin-bottom: 0.5rem;
+        }
+
+        /* Nested list spacing */
+        .chat-message-content ul ul,
+        .chat-message-content ol ol,
+        .chat-message-content ul ol,
+        .chat-message-content ol ul {
+          margin: 0.5rem 0;
+        }
+
         .prose img {
           display: block;
           max-width: 100%;
