@@ -52,7 +52,7 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hello! I am your AI assistant. How can I help you today?",
+      text: "Hello! I am your AI partner, Husqy. How can I help you today?",
       isUser: false,
       timestamp: new Date()
     }
@@ -247,7 +247,7 @@ function App() {
     setMessages([
       {
         id: 1,
-        text: "Hello! I am your AI assistant. How can I help you today?",
+        text: "Hello! I am your AI partner, Husqy. How can I help you today?",
         isUser: false,
         timestamp: new Date()
       }
@@ -294,10 +294,10 @@ function App() {
         <main className="client-main">
           <div className="welcome-section">
             <h1 className="welcome-title">
-              Hello, this is an <span className="ai-text">AI assistant</span>!
+              Your AI Partner, <span className="ai-text husqy-gradient">Husqy</span>!
             </h1>
             <p className="welcome-subtitle">
-              I will help you find answers to your questions. Here are some examples:
+              I'm here to help you explore Hutech Solutions' cutting-edge technology and IT services. Whether you're curious about our cutting-edge technology or need details on our IT services, feel free to ask.
             </p>
           </div>
 
@@ -1066,14 +1066,23 @@ const RelatedContentCarousel: React.FC<{ items: RelatedContent[] }> = ({ items }
                 {new URL(item.url).hostname.replace('www.', '')}
               </span>
               {item.image && item.image !== "No image found." && (
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
+                <img
+                  src={item.image}
+                  alt={item.title}
                   className="w-full h-20 object-cover rounded-md mb-2"
                   onError={(e) => {
                     console.error('Image failed to load:', item.image);
-                    (e.target as HTMLElement).style.display = 'none';
+                    const img = e.target as HTMLImageElement;
+                    img.src = 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
+                    img.onError = null; // Prevent infinite loop
                   }}
+                />
+              )}
+              {(!item.image || item.image === "No image found.") && (
+                <img
+                  src="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+                  alt="Hutech Solutions"
+                  className="w-full h-20 object-cover rounded-md mb-2"
                 />
               )}
               <h5 className="text-sm font-medium text-gray-800 line-clamp-2">{item.title}</h5>
