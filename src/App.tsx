@@ -65,6 +65,7 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [searchInitiated, setSearchInitiated] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [scrollTriggered, setScrollTriggered] = useState(false);
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {
