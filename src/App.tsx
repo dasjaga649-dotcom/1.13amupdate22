@@ -1155,26 +1155,13 @@ const RelatedContentCarousel: React.FC<{ items: RelatedContent[] }> = ({ items }
               <span className="text-xs text-gray-500 font-medium">
                 {new URL(item.url).hostname.replace('www.', '')}
               </span>
-              {item.image && item.image !== "No image found." && (
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-20 object-cover rounded-md mb-2"
-                  onError={(e) => {
-                    console.error('Image failed to load:', item.image);
-                    const img = e.target as HTMLImageElement;
-                    img.src = 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
-                    img.onerror = null; // Prevent infinite loop
-                  }}
-                />
-              )}
-              {(!item.image || item.image === "No image found.") && (
-                <img
-                  src="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
-                  alt="Hutech Solutions"
-                  className="w-full h-20 object-cover rounded-md mb-2"
-                />
-              )}
+              <ImageWithFallback
+                src={item.image}
+                alt={item.title}
+                className="w-full h-20 object-cover rounded-md mb-2"
+                fallbackSrc="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+                fallbackAlt="Hutech Solutions"
+              />
               <h5 className="text-sm font-medium text-gray-800 line-clamp-2">{item.title}</h5>
               {item.url && (
                 <a 
