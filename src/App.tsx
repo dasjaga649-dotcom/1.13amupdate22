@@ -1134,7 +1134,7 @@ const RelatedContentCarousel: React.FC<{ items: RelatedContent[] }> = ({ items }
                     console.error('Image failed to load:', item.image);
                     const img = e.target as HTMLImageElement;
                     img.src = 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
-                    img.onError = null; // Prevent infinite loop
+                    img.onerror = null; // Prevent infinite loop
                   }}
                 />
               )}
@@ -1282,7 +1282,7 @@ const preprocessResponse = (text: string): string => {
   processedText = processedText.replace(/^(\s*)\*\s+/gm, '$1* ');
 
   // Add space after bullet points if missing
-  processedText = processedText.replace(/^(\s*\*|\s*-|\s*\+)([^\s])/gm, '$1 $2');
+  processedText = processedText.replace(/^(\s*[*]|\s*-|\s*[+])([^\s])/gm, '$1 $2');
 
   // Fix heading spacing
   processedText = processedText.replace(/^(#+)(?! )/gm, '$1 ');
