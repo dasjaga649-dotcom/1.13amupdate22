@@ -820,7 +820,8 @@ const MessageActions: React.FC<{
           markdown += '## Related Images\n\n';
           itemsWithImages.forEach(item => {
             markdown += `### ${item.title}\n`;
-            markdown += `![${item.title}](${item.image})\n\n`;
+            const imageUrl = item.image && item.image !== "No image found." ? item.image : 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
+            markdown += `![${item.title}](${imageUrl})\n\n`;
           });
         }
       }
