@@ -277,6 +277,22 @@
           transform: translateX(2px);
         }
 
+        /* Image loading and error states */
+        .card-carousel-item img {
+          transition: opacity 0.3s ease-in-out;
+          background-color: #f3f4f6;
+        }
+
+        .card-carousel-item img[src*="hutech-logo"] {
+          opacity: 0.8;
+          filter: grayscale(20%);
+        }
+
+        /* Prevent layout shift during image loading */
+        .card-carousel-item {
+          min-height: 120px;
+        }
+
         /* CLIENT PAGE STYLES */
         .client-page {
           height: 100vh;
