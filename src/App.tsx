@@ -161,7 +161,7 @@ function App() {
       setCurrentPage('chat');
       setIsSearching(true);
       setIsTransitioning(false);
-    }, 1200); // 1.2s total animation duration
+    }, 800); // 0.8s total animation duration
 
     const userMessage: Message = {
       id: Date.now(),
