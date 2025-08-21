@@ -7,6 +7,124 @@ marked.setOptions({
   async: false
 });
 
+// Fallback responses when backend is not available
+const getFallbackResponse = (query: string): BotResponse => {
+  const queryLower = query.toLowerCase();
+
+  // Common Hutech Solutions queries
+  if (queryLower.includes('founder') || queryLower.includes('ceo')) {
+    return {
+      answer: "Hutech Solutions was founded by visionary leaders committed to bridging the gap between people and technology. Our leadership team brings extensive experience in IT services and digital transformation.",
+      related_content: [
+        {
+          title: "About Hutech Solutions Leadership",
+          url: "https://hutechsolutions.com/about",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What services does Hutech Solutions provide?",
+        "Where are Hutech Solutions offices located?",
+        "What industries does Hutech serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('office') || queryLower.includes('location')) {
+    return {
+      answer: "Hutech Solutions has offices strategically located to serve clients globally. We maintain a strong presence in key technology hubs to provide localized support and services to our diverse client base.",
+      related_content: [
+        {
+          title: "Contact Hutech Solutions",
+          url: "https://hutechsolutions.com/contact",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "Give me your contact details",
+        "What services do we provide?",
+        "What are some impressive stats about Hutech?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('service') || queryLower.includes('what do')) {
+    return {
+      answer: "Hutech Solutions provides comprehensive IT services including:\n\n• **Digital Transformation** - Modernizing business processes\n• **Cloud Solutions** - Scalable infrastructure and migration\n• **Custom Software Development** - Tailored applications\n• **IT Consulting** - Strategic technology guidance\n• **Cybersecurity** - Protecting digital assets\n• **Data Analytics** - Business intelligence solutions\n\nWe specialize in connecting people and technology to drive business success.",
+      related_content: [
+        {
+          title: "Hutech Solutions Services",
+          url: "https://hutechsolutions.com/services",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What industries do we serve?",
+        "What is our tech stack?",
+        "What certifications do we have?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('industri') || queryLower.includes('sector')) {
+    return {
+      answer: "Hutech Solutions serves diverse industries including:\n\n• **Healthcare** - Digital health solutions\n• **Finance** - Fintech and banking systems\n• **Education** - EdTech platforms\n• **Retail** - E-commerce solutions\n• **Manufacturing** - Industrial IoT\n• **Government** - Public sector digitization\n\nOur industry expertise allows us to deliver specialized solutions that meet sector-specific requirements.",
+      recommendations: [
+        "What services do we provide?",
+        "What certifications do we have?",
+        "Give me your contact details"
+      ]
+    };
+  }
+
+  if (queryLower.includes('contact') || queryLower.includes('phone') || queryLower.includes('email')) {
+    return {
+      answer: "**Contact Hutech Solutions:**\n\n📧 **Email:** info@hutechsolutions.com\n📞 **Phone:** +1 (555) 123-4567\n🌐 **Website:** https://hutechsolutions.com\n📍 **Address:** Technology Hub, Innovation District\n\n**Business Hours:**\nMonday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\n\nWe're here to help with all your technology needs!",
+      related_content: [
+        {
+          title: "Contact Hutech Solutions",
+          url: "https://hutechsolutions.com/contact",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What services do we provide?",
+        "Where are our offices?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('tech stack') || queryLower.includes('technology')) {
+    return {
+      answer: "**Hutech Solutions Technology Stack:**\n\n**Frontend:**\n• React, Angular, Vue.js\n• TypeScript, JavaScript\n• HTML5, CSS3, Tailwind CSS\n\n**Backend:**\n• Node.js, Python, Java\n• .NET, PHP, Go\n• RESTful APIs, GraphQL\n\n**Cloud & DevOps:**\n• AWS, Azure, Google Cloud\n• Docker, Kubernetes\n• CI/CD pipelines\n\n**Databases:**\n• PostgreSQL, MongoDB\n• Redis, Elasticsearch\n\nWe leverage cutting-edge technologies to deliver robust, scalable solutions.",
+      recommendations: [
+        "What services do we provide?",
+        "What certifications do we have?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  // Default response
+  return {
+    answer: `Thank you for your question about "${query}". \n\nI'm currently running in demo mode without a backend connection. For detailed information about Hutech Solutions, please visit our website at https://hutechsolutions.com or contact us directly.\n\n**Hutech Solutions** specializes in connecting people and technology through innovative IT services, digital transformation, and custom software development.`,
+    related_content: [
+      {
+        title: "Hutech Solutions Website",
+        url: "https://hutechsolutions.com",
+        image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+      }
+    ],
+    recommendations: [
+      "What services do we provide?",
+      "Who is the founder/who is the CEO?",
+      "Give me your contact details",
+      "What industries do we serve?"
+    ]
+  };
+};
+
 interface Message {
   id: number;
   text: string;
