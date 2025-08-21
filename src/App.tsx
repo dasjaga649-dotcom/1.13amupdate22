@@ -182,6 +182,7 @@ function App() {
     // Start the search transition animation
     setIsTransitioning(true);
     setSearchInitiated(true);
+    setScrollTriggered(false);
 
     // Wait for animations to complete before switching to chat page
     setTimeout(() => {
