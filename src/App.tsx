@@ -1291,7 +1291,7 @@ const preprocessResponse = (text: string): string => {
   processedText = processedText.replace(/^(\s*>)(?! )/gm, '$1 ');
 
   // Ensure double line breaks between paragraphs for better readability
-  processedText = processedText.replace(/\n([^-\*\+\s\n])/g, '\n\n$1');
+  processedText = processedText.replace(/\n([^-*+\s\n])/g, '\n\n$1');
 
   return processedText.trim();
 };
