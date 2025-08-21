@@ -98,6 +98,32 @@ function App() {
     };
   }, [showMenu]);
 
+  // Add scroll detection for smooth chat page transition
+  useEffect(() => {
+    if (currentPage === 'client' && !isTransitioning) {
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // Check if scrolled to bottom (with small threshold)
+        if (scrollTop + windowHeight >= documentHeight - 50) {
+          if (!scrollTriggered) {
+            setScrollTriggered(true);
+            setCurrentPage('chat');
+            setSearchInitiated(true);
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [currentPage, isTransitioning, scrollTriggered]);
+
   const questionCards: QuestionCard[] = [
     {
       icon: '👤',
