@@ -79,7 +79,7 @@ const getFallbackResponse = (query: string): BotResponse => {
 
   if (queryLower.includes('contact') || queryLower.includes('phone') || queryLower.includes('email')) {
     return {
-      answer: "**Contact Hutech Solutions:**\n\n📧 **Email:** info@hutechsolutions.com\n📞 **Phone:** +1 (555) 123-4567\n🌐 **Website:** https://hutechsolutions.com\n📍 **Address:** Technology Hub, Innovation District\n\n**Business Hours:**\nMonday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\n\nWe're here to help with all your technology needs!",
+      answer: "**Contact Hutech Solutions:**\n\n📧 **Email:** info@hutechsolutions.com\n📞 **Phone:** +1 (555) 123-4567\n🌐 **Website:** https://hutechsolutions.com\n��� **Address:** Technology Hub, Innovation District\n\n**Business Hours:**\nMonday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\n\nWe're here to help with all your technology needs!",
       related_content: [
         {
           title: "Contact Hutech Solutions",
@@ -414,7 +414,7 @@ function App() {
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      console.warn('Backend not available, using fallback response:', error.message);
+      console.warn('Backend not available, using fallback response:', error instanceof Error ? error.message : String(error));
 
       // Provide helpful fallback response based on the query
       const fallbackResponse = getFallbackResponse(messageText);
