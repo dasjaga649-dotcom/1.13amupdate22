@@ -334,11 +334,23 @@
         .chat-page-layer.visible {
           opacity: 1;
           pointer-events: auto;
+          animation: chatLayerFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .chat-page-layer.hidden {
           opacity: 0;
           pointer-events: none;
+        }
+
+        @keyframes chatLayerFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         /* CLIENT PAGE STYLES */
