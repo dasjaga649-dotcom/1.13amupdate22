@@ -450,7 +450,12 @@ function App() {
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      console.warn('Backend not available, using fallback response:', error instanceof Error ? error.message : String(error));
+      // Handle different types of errors
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.log('Request timed out, using fallback response');
+      } else {
+        console.warn('Backend not available, using fallback response:', error instanceof Error ? error.message : String(error));
+      }
 
       // Provide helpful fallback response based on the query
       const fallbackResponse = getFallbackResponse(messageText);
