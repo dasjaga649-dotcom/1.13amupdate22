@@ -512,17 +512,17 @@
         }
 
         .card-title {
-          font-size: 0.75rem;
+          font-size: 0.65rem;
           font-weight: 600;
           color: #1f2937;
           margin: 0 0 0.125rem 0;
         }
 
         .card-description {
-          font-size: 0.625rem;
+          font-size: 0.55rem;
           color: #6b7280;
           margin: 0;
-          line-height: 1.3;
+          line-height: 1.2;
         }
 
         .client-search-container {
