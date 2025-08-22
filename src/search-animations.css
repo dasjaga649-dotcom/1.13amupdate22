@@ -62,32 +62,40 @@
   }
 }
 
-/* Question cards slide out animations */
+/* Question cards slide out animations - enhanced for dramatic effect */
 @keyframes slideOutLeft {
   0% {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateX(0) scale(1) rotate(0deg);
   }
-  50% {
-    transform: translateX(-20px) scale(0.95);
+  30% {
+    transform: translateX(-50px) scale(0.9) rotate(-5deg);
+  }
+  60% {
+    transform: translateX(-150px) scale(0.7) rotate(-10deg);
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
-    transform: translateX(-150px) scale(0.8);
+    transform: translateX(-300px) scale(0.5) rotate(-15deg);
   }
 }
 
 @keyframes slideOutRight {
   0% {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateX(0) scale(1) rotate(0deg);
   }
-  50% {
-    transform: translateX(20px) scale(0.95);
+  30% {
+    transform: translateX(50px) scale(0.9) rotate(5deg);
+  }
+  60% {
+    transform: translateX(150px) scale(0.7) rotate(10deg);
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
-    transform: translateX(150px) scale(0.8);
+    transform: translateX(300px) scale(0.5) rotate(15deg);
   }
 }
 
