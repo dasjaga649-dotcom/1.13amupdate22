@@ -404,10 +404,12 @@ function App() {
     setInputValue('');
     setIsLoading(true);
 
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    let timeoutId: NodeJS.Timeout | null = null;
+
     try {
-      // Add timeout to prevent hanging requests
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
       const response = await fetch('http://localhost:3001/query', {
         method: 'POST',
@@ -417,8 +419,6 @@ function App() {
         body: JSON.stringify({ query: messageText }),
         signal: controller.signal
       });
-
-      clearTimeout(timeoutId);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -470,6 +470,10 @@ function App() {
       };
       setMessages(prev => [...prev, fallbackMessage]);
     } finally {
+      // Always clear the timeout to prevent memory leaks
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       setIsLoading(false);
     }
   };
