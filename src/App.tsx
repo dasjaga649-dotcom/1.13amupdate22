@@ -521,9 +521,12 @@ function App() {
     setSearchInitiated(false);
   };
 
-  if (currentPage === 'client') {
-    return (
-      <div className={`client-page ${isTransitioning ? 'transitioning' : ''}`}>
+  // Combined layout with both client and chat pages
+  return (
+    <div className="app-container">
+      {/* Client Page Layer */}
+      <div className={`client-page-layer ${currentPage === 'chat' ? 'hidden' : 'visible'} ${isTransitioning ? 'transitioning' : ''}`}>
+        <div className="client-page">
         {/* Header */}
         <header className="client-header">
           <div className="header-content">
@@ -605,13 +608,12 @@ function App() {
             </div>
           </div>
         </main>
+        </div>
       </div>
-    );
-  }
 
-  // Chat Page
-  return (
-    <div className={`bg-white body ${searchInitiated && !scrollTriggered ? 'page-transition-enter-active' : ''} ${scrollTriggered ? 'page-transition-instant' : ''} ${isSearching ? 'chat-searching' : ''}`} id='body'>
+      {/* Chat Page Layer */}
+      <div className={`chat-page-layer ${currentPage === 'chat' ? 'visible' : 'hidden'} ${searchInitiated && !scrollTriggered ? 'page-transition-enter-active' : ''} ${scrollTriggered ? 'page-transition-instant' : ''} ${isSearching ? 'chat-searching' : ''}`}>
+        <div className="bg-white body" id='body'>
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history-container">
         {messages.map((message) => (
@@ -701,6 +703,8 @@ function App() {
             )}
             </div>
           </form>
+        </div>
+      </div>
         </div>
       </div>
     </div>
