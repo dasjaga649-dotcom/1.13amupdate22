@@ -39,14 +39,14 @@
   animation: cardsDisappear 0.5s ease-out forwards;
 }
 
-/* Individual question card animations */
-.client-page.transitioning .question-card-horizontal:nth-child(odd) {
-  animation: slideOutLeft 0.5s ease-out forwards;
+/* Individual question card animations - enhanced left/right sliding */
+.client-page-layer.transitioning .question-card-horizontal:nth-child(odd) {
+  animation: slideOutLeft 0.6s ease-out forwards;
   animation-delay: 0.05s;
 }
 
-.client-page.transitioning .question-card-horizontal:nth-child(even) {
-  animation: slideOutRight 0.5s ease-out forwards;
+.client-page-layer.transitioning .question-card-horizontal:nth-child(even) {
+  animation: slideOutRight 0.6s ease-out forwards;
   animation-delay: 0.1s;
 }
 
