@@ -451,14 +451,21 @@ function App() {
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       // Handle different types of errors
+      let fallbackResponse: BotResponse;
+
       if (error instanceof Error && error.name === 'AbortError') {
         console.log('Request timed out, using fallback response');
+        // Provide a timeout-specific response
+        fallbackResponse = {
+          answer: `I'm taking a bit longer to process your question "${messageText}". Let me provide you with some helpful information while running in demo mode.\n\n${getFallbackResponse(messageText).answer}`,
+          related_content: getFallbackResponse(messageText).related_content,
+          recommendations: getFallbackResponse(messageText).recommendations
+        };
       } else {
         console.warn('Backend not available, using fallback response:', error instanceof Error ? error.message : String(error));
+        // Provide helpful fallback response based on the query
+        fallbackResponse = getFallbackResponse(messageText);
       }
-
-      // Provide helpful fallback response based on the query
-      const fallbackResponse = getFallbackResponse(messageText);
 
       const fallbackMessage: Message = {
         id: Date.now() + 1,
