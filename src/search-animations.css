@@ -50,15 +50,20 @@
   animation-delay: 0.1s;
 }
 
-/* Welcome section fade out animation */
+/* Welcome section fade out animation - enhanced */
 @keyframes fadeOutUp {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-20px) scale(0.95);
   }
   100% {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-50px) scale(0.9);
+    visibility: hidden;
   }
 }
 
