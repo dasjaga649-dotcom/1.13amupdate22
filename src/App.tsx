@@ -1504,12 +1504,12 @@ const renderIcons = (text: string): string => {
 const preprocessResponse = (text: string): string => {
   let processedText = text.replace(/&nbsp;|\u00A0|\t/g, ' ');
 
-  // Handle line breaks - convert \n to proper spacing
+  // Handle line breaks - convert \n to single line spacing
   processedText = processedText.replace(/\\n/g, '\n');
-  processedText = processedText.replace(/\n\n+/g, '\n\n'); // Normalize multiple line breaks
+  processedText = processedText.replace(/\n\n+/g, '\n'); // Convert multiple line breaks to single
 
-  // Ensure proper spacing around horizontal rules
-  processedText = processedText.replace(/([^\n])---/g, '$1\n\n---\n\n');
+  // Ensure single spacing around horizontal rules
+  processedText = processedText.replace(/([^\n])---/g, '$1\n---\n');
 
   // Fix bullet point spacing
   processedText = processedText.replace(/^(\s*)\*\s+/gm, '$1* ');
@@ -1517,14 +1517,14 @@ const preprocessResponse = (text: string): string => {
   // Add space after bullet points if missing
   processedText = processedText.replace(/^(\s*[*]|\s*-|\s*[+])([^\s])/gm, '$1 $2');
 
-  // Fix heading spacing
+  // Fix heading spacing - single line breaks
   processedText = processedText.replace(/^(#+)(?! )/gm, '$1 ');
 
   // Fix blockquote spacing
   processedText = processedText.replace(/^(\s*>)(?! )/gm, '$1 ');
 
-  // Ensure double line breaks between paragraphs for better readability
-  processedText = processedText.replace(/\n([^-*+\s\n])/g, '\n\n$1');
+  // Ensure single line breaks between paragraphs for compact spacing
+  processedText = processedText.replace(/\n([^-*+\s\n#])/g, '\n$1');
 
   return processedText.trim();
 };
