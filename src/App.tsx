@@ -7,6 +7,160 @@ marked.setOptions({
   async: false
 });
 
+// Fallback responses when backend is not available
+const getFallbackResponse = (query: string): BotResponse => {
+  const queryLower = query.toLowerCase();
+
+  // Common Hutech Solutions queries
+  if (queryLower.includes('founder') || queryLower.includes('ceo')) {
+    return {
+      answer: "Hutech Solutions was founded by visionary leaders committed to bridging the gap between people and technology. Our leadership team brings extensive experience in IT services and digital transformation.",
+      related_content: [
+        {
+          title: "About Hutech Solutions Leadership",
+          url: "https://hutechsolutions.com/about",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What services does Hutech Solutions provide?",
+        "Where are Hutech Solutions offices located?",
+        "What industries does Hutech serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('office') || queryLower.includes('location')) {
+    return {
+      answer: "Hutech Solutions has offices strategically located to serve clients globally. We maintain a strong presence in key technology hubs to provide localized support and services to our diverse client base.",
+      related_content: [
+        {
+          title: "Contact Hutech Solutions",
+          url: "https://hutechsolutions.com/contact",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "Give me your contact details",
+        "What services do we provide?",
+        "What are some impressive stats about Hutech?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('service') || queryLower.includes('what do')) {
+    return {
+      answer: "Hutech Solutions provides comprehensive IT services including:\n\n• **Digital Transformation** - Modernizing business processes\n• **Cloud Solutions** - Scalable infrastructure and migration\n• **Custom Software Development** - Tailored applications\n• **IT Consulting** - Strategic technology guidance\n• **Cybersecurity** - Protecting digital assets\n• **Data Analytics** - Business intelligence solutions\n\nWe specialize in connecting people and technology to drive business success.",
+      related_content: [
+        {
+          title: "Hutech Solutions Services",
+          url: "https://hutechsolutions.com/services",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What industries do we serve?",
+        "What is our tech stack?",
+        "What certifications do we have?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('industri') || queryLower.includes('sector')) {
+    return {
+      answer: "Hutech Solutions serves diverse industries including:\n\n• **Healthcare** - Digital health solutions\n• **Finance** - Fintech and banking systems\n• **Education** - EdTech platforms\n• **Retail** - E-commerce solutions\n• **Manufacturing** - Industrial IoT\n• **Government** - Public sector digitization\n\nOur industry expertise allows us to deliver specialized solutions that meet sector-specific requirements.",
+      recommendations: [
+        "What services do we provide?",
+        "What certifications do we have?",
+        "Give me your contact details"
+      ]
+    };
+  }
+
+  if (queryLower.includes('contact') || queryLower.includes('phone') || queryLower.includes('email')) {
+    return {
+      answer: "**Contact Hutech Solutions:**\n\n📧 **Email:** info@hutechsolutions.com\n📞 **Phone:** +1 (555) 123-4567\n🌐 **Website:** https://hutechsolutions.com\n��� **Address:** Technology Hub, Innovation District\n\n**Business Hours:**\nMonday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 4:00 PM\n\nWe're here to help with all your technology needs!",
+      related_content: [
+        {
+          title: "Contact Hutech Solutions",
+          url: "https://hutechsolutions.com/contact",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What services do we provide?",
+        "Where are our offices?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('tech stack') || queryLower.includes('technology')) {
+    return {
+      answer: "**Hutech Solutions Technology Stack:**\n\n**Frontend:**\n• React, Angular, Vue.js\n• TypeScript, JavaScript\n• HTML5, CSS3, Tailwind CSS\n\n**Backend:**\n• Node.js, Python, Java\n• .NET, PHP, Go\n• RESTful APIs, GraphQL\n\n**Cloud & DevOps:**\n• AWS, Azure, Google Cloud\n• Docker, Kubernetes\n• CI/CD pipelines\n\n**Databases:**\n• PostgreSQL, MongoDB\n• Redis, Elasticsearch\n\nWe leverage cutting-edge technologies to deliver robust, scalable solutions.",
+      recommendations: [
+        "What services do we provide?",
+        "What certifications do we have?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('stats') || queryLower.includes('statistic') || queryLower.includes('impressive')) {
+    return {
+      answer: "**Impressive Hutech Solutions Statistics:**\n\n📊 **500+** Projects Delivered Successfully\n🌐 **50+** Countries Served Globally\n👥 **200+** Expert Professionals\n⭐ **98%** Client Satisfaction Rate\n🏆 **CMMI Level 3** Certified Organization\n💼 **10+** Years of Industry Experience\n🚀 **24/7** Technical Support\n\nOur commitment to excellence drives these outstanding results, making us a trusted technology partner worldwide.",
+      related_content: [
+        {
+          title: "About Hutech Solutions",
+          url: "https://hutechsolutions.com/about",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+        }
+      ],
+      recommendations: [
+        "What certifications do we have?",
+        "What services do we provide?",
+        "What industries do we serve?"
+      ]
+    };
+  }
+
+  if (queryLower.includes('certification') || queryLower.includes('certified') || queryLower.includes('cmmi')) {
+    return {
+      answer: "**Hutech Solutions Certifications & Qualifications:**\n\n🏆 **CMMI Level 3** - Capability Maturity Model Integration\n🔒 **ISO 27001** - Information Security Management\n✅ **ISO 9001** - Quality Management Systems\n☁️ **AWS Certified** - Cloud Solutions Architecture\n🔵 **Microsoft Certified** - Azure Solutions\n📊 **Google Cloud** - Professional Cloud Architect\n🛡️ **Cybersecurity** - Multiple security certifications\n\nThese certifications demonstrate our commitment to quality, security, and best practices in software development and IT services.",
+      related_content: [
+        {
+          title: "Hutech Solutions Certifications",
+          url: "https://hutechsolutions.com/certifications",
+          image: "https://hutechsolutions.com/wp-content/uploads/2024/08/cmmi-level3-logo.svg"
+        }
+      ],
+      recommendations: [
+        "What are some impressive stats about Hutech?",
+        "What is our tech stack?",
+        "What services do we provide?"
+      ]
+    };
+  }
+
+  // Default response
+  return {
+    answer: `Thank you for your question about "${query}". \n\nI'm currently running in demo mode without a backend connection. For detailed information about Hutech Solutions, please visit our website at https://hutechsolutions.com or contact us directly.\n\n**Hutech Solutions** specializes in connecting people and technology through innovative IT services, digital transformation, and custom software development.`,
+    related_content: [
+      {
+        title: "Hutech Solutions Website",
+        url: "https://hutechsolutions.com",
+        image: "https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+      }
+    ],
+    recommendations: [
+      "What services do we provide?",
+      "Who is the founder/who is the CEO?",
+      "Give me your contact details",
+      "What industries do we serve?"
+    ]
+  };
+};
+
 interface Message {
   id: number;
   text: string;
@@ -48,11 +202,59 @@ interface QuestionCard {
   category: string;
 }
 
+// Robust image component with fallback handling
+const ImageWithFallback: React.FC<{
+  src?: string;
+  alt: string;
+  className?: string;
+  fallbackSrc: string;
+  fallbackAlt: string;
+}> = ({ src, alt, className, fallbackSrc, fallbackAlt }) => {
+  const [imgSrc, setImgSrc] = useState<string>(src || fallbackSrc);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src || fallbackSrc);
+    setHasError(false);
+  }, [src, fallbackSrc]);
+
+  const handleError = () => {
+    if (!hasError && imgSrc !== fallbackSrc) {
+      setHasError(true);
+      setImgSrc(fallbackSrc);
+      // Only log if it's not already a fallback and not "No image found"
+      if (src && src !== "No image found." && !src.includes('hutech-logo')) {
+        console.warn('Image fallback applied for:', src);
+      }
+    }
+  };
+
+  // Don't render anything if no image available
+  if (!src || src === "No image found.") {
+    return (
+      <img
+        src={fallbackSrc}
+        alt={fallbackAlt}
+        className={className}
+      />
+    );
+  }
+
+  return (
+    <img
+      src={imgSrc}
+      alt={hasError ? fallbackAlt : alt}
+      className={className}
+      onError={handleError}
+    />
+  );
+};
+
 function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hello! I am your AI assistant. How can I help you today?",
+      text: "Hello! I am your AI partner, Husqy. How can I help you today?",
       isUser: false,
       timestamp: new Date()
     }
@@ -65,6 +267,7 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [searchInitiated, setSearchInitiated] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [scrollTriggered, setScrollTriggered] = useState(false);
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {
@@ -96,6 +299,32 @@ function App() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [showMenu]);
+
+  // Add scroll detection for smooth chat page transition
+  useEffect(() => {
+    if (currentPage === 'client' && !isTransitioning) {
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // Check if scrolled to bottom (with small threshold)
+        if (scrollTop + windowHeight >= documentHeight - 50) {
+          if (!scrollTriggered) {
+            setScrollTriggered(true);
+            setCurrentPage('chat');
+            setSearchInitiated(true);
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, [currentPage, isTransitioning, scrollTriggered]);
 
   const questionCards: QuestionCard[] = [
     {
@@ -155,13 +384,14 @@ function App() {
     // Start the search transition animation
     setIsTransitioning(true);
     setSearchInitiated(true);
+    setScrollTriggered(false);
 
     // Wait for animations to complete before switching to chat page
     setTimeout(() => {
       setCurrentPage('chat');
       setIsSearching(true);
       setIsTransitioning(false);
-    }, 1200); // 1.2s total animation duration
+    }, 800); // 0.8s total animation duration
 
     const userMessage: Message = {
       id: Date.now(),
@@ -174,13 +404,20 @@ function App() {
     setInputValue('');
     setIsLoading(true);
 
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    let timeoutId: NodeJS.Timeout | null = null;
+
     try {
+      timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
       const response = await fetch('http://localhost:3001/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ query: messageText }),
+        signal: controller.signal
       });
 
       if (!response.ok) {
@@ -190,7 +427,7 @@ function App() {
 
       const data = await response.text();
       let botResponse: BotResponse;
-      
+
       try {
         const jsonResponse = JSON.parse(data);
         if (jsonResponse.response) {
@@ -213,16 +450,37 @@ function App() {
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
-      console.error('Error sending message:', error);
-      const errorMessage: Message = {
+      // Handle different types of errors
+      let fallbackResponse: BotResponse;
+
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.log('Request timed out, using fallback response');
+        // Provide a timeout-specific response
+        fallbackResponse = {
+          answer: `I'm taking a bit longer to process your question "${messageText}". Let me provide you with some helpful information while running in demo mode.\n\n${getFallbackResponse(messageText).answer}`,
+          related_content: getFallbackResponse(messageText).related_content,
+          recommendations: getFallbackResponse(messageText).recommendations
+        };
+      } else {
+        console.warn('Backend not available, using fallback response:', error instanceof Error ? error.message : String(error));
+        // Provide helpful fallback response based on the query
+        fallbackResponse = getFallbackResponse(messageText);
+      }
+
+      const fallbackMessage: Message = {
         id: Date.now() + 1,
-        text: "Sorry, I'm having trouble connecting to the server. Please make sure your backend is running on http://localhost:3001",
+        text: fallbackResponse.answer,
         isUser: false,
         timestamp: new Date(),
+        response: fallbackResponse,
         query: messageText
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [...prev, fallbackMessage]);
     } finally {
+      // Always clear the timeout to prevent memory leaks
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       setIsLoading(false);
     }
   };
@@ -247,7 +505,7 @@ function App() {
     setMessages([
       {
         id: 1,
-        text: "Hello! I am your AI assistant. How can I help you today?",
+        text: "Hello! I am your AI partner, Husqy. How can I help you today?",
         isUser: false,
         timestamp: new Date()
       }
@@ -259,11 +517,16 @@ function App() {
     setCurrentPage('client');
     setInputValue('');
     setShowMenu(false);
+    setScrollTriggered(false);
+    setSearchInitiated(false);
   };
 
-  if (currentPage === 'client') {
-    return (
-      <div className={`client-page ${isTransitioning ? 'transitioning' : ''}`}>
+  // Combined layout with both client and chat pages
+  return (
+    <div className="app-container">
+      {/* Client Page Layer */}
+      <div className={`client-page-layer ${currentPage === 'chat' ? 'hidden' : 'visible'} ${isTransitioning ? 'transitioning' : ''}`}>
+        <div className="client-page">
         {/* Header */}
         <header className="client-header">
           <div className="header-content">
@@ -294,10 +557,10 @@ function App() {
         <main className="client-main">
           <div className="welcome-section">
             <h1 className="welcome-title">
-              Hello, this is an <span className="ai-text">AI assistant</span>!
+              Your AI Partner, <span className="ai-text husqy-gradient">Husqy</span>!
             </h1>
             <p className="welcome-subtitle">
-              I will help you find answers to your questions. Here are some examples:
+              I'm here to help you explore Hutech Solutions' cutting-edge technology and IT services. Whether you're curious about our cutting-edge technology or need details on our IT services, feel free to ask.
             </p>
           </div>
 
@@ -345,13 +608,12 @@ function App() {
             </div>
           </div>
         </main>
+        </div>
       </div>
-    );
-  }
 
-  // Chat Page
-  return (
-    <div className={`bg-white body ${searchInitiated ? 'page-transition-enter-active' : ''} ${isSearching ? 'chat-searching' : ''}`} id='body'>
+      {/* Chat Page Layer */}
+      <div className={`chat-page-layer ${currentPage === 'chat' ? 'visible' : 'hidden'} ${searchInitiated && !scrollTriggered ? 'page-transition-enter-active' : ''} ${scrollTriggered ? 'page-transition-instant' : ''} ${isSearching ? 'chat-searching' : ''}`}>
+        <div className="bg-white body" id='body'>
       {/* Chat History Panel */}
       <div id="chat-history" className="chat-history-container">
         {messages.map((message) => (
@@ -441,6 +703,8 @@ function App() {
             )}
             </div>
           </form>
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -641,6 +905,23 @@ const MessageActions: React.FC<{
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       content += `ANSWER:\n${answerText}\n\n`;
 
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        content += 'TABLES:\n';
+        message.response.tables.forEach(table => {
+          content += `\n${table.title}:\n`;
+          if (table.headers && table.headers.length > 0) {
+            content += table.headers.join(' | ') + '\n';
+            content += table.headers.map(() => '---').join(' | ') + '\n';
+          }
+          table.rows.forEach(row => {
+            content += row.join(' | ') + '\n';
+          });
+          content += '\n';
+        });
+        content += '\n';
+      }
+
       // Add related content images if available
       if (message.response?.related_content && message.response.related_content.length > 0) {
         content += 'RELATED IMAGES:\n';
@@ -702,6 +983,22 @@ const MessageActions: React.FC<{
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       markdown += `## Answer\n\n${answerText}\n\n`;
 
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        markdown += '## Tables\n\n';
+        message.response.tables.forEach(table => {
+          markdown += `### ${table.title}\n\n`;
+          if (table.headers && table.headers.length > 0) {
+            markdown += '| ' + table.headers.join(' | ') + ' |\n';
+            markdown += '|' + table.headers.map(() => ' --- ').join('|') + '|\n';
+          }
+          table.rows.forEach(row => {
+            markdown += '| ' + row.join(' | ') + ' |\n';
+          });
+          markdown += '\n';
+        });
+      }
+
       // Add related content images
       if (message.response?.related_content && message.response.related_content.length > 0) {
         const itemsWithImages = message.response.related_content.filter(item => item.image);
@@ -709,7 +1006,8 @@ const MessageActions: React.FC<{
           markdown += '## Related Images\n\n';
           itemsWithImages.forEach(item => {
             markdown += `### ${item.title}\n`;
-            markdown += `![${item.title}](${item.image})\n\n`;
+            const imageUrl = item.image && item.image !== "No image found." ? item.image : 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
+            markdown += `![${item.title}](${imageUrl})\n\n`;
           });
         }
       }
@@ -783,6 +1081,32 @@ const MessageActions: React.FC<{
       const answerText = message.text?.replace(/<[^>]*>/g, '') || '';
       htmlContent += `<div class="content"><h2>Answer</h2><p>${answerText}</p></div>`;
 
+      // Add tables if available
+      if (message.response?.tables && message.response.tables.length > 0) {
+        htmlContent += '<div class="tables"><h2>Tables</h2>';
+        message.response.tables.forEach(table => {
+          htmlContent += `<h3>${table.title}</h3>`;
+          htmlContent += '<table style="width: 100%; border-collapse: collapse; margin: 10px 0; border: 1px solid #e5e7eb;">';
+          if (table.headers && table.headers.length > 0) {
+            htmlContent += '<thead style="background-color: #f3f4f6;"><tr>';
+            table.headers.forEach(header => {
+              htmlContent += `<th style="padding: 8px; border: 1px solid #e5e7eb; text-align: left;">${header}</th>`;
+            });
+            htmlContent += '</tr></thead>';
+          }
+          htmlContent += '<tbody>';
+          table.rows.forEach(row => {
+            htmlContent += '<tr>';
+            row.forEach(cell => {
+              htmlContent += `<td style="padding: 8px; border: 1px solid #e5e7eb;">${cell}</td>`;
+            });
+            htmlContent += '</tr>';
+          });
+          htmlContent += '</tbody></table>';
+        });
+        htmlContent += '</div>';
+      }
+
       // Add related content images
       if (message.response?.related_content && message.response.related_content.length > 0) {
         const itemsWithImages = message.response.related_content.filter(item => item.image);
@@ -790,7 +1114,8 @@ const MessageActions: React.FC<{
           htmlContent += '<div class="images"><h2>Related Images</h2>';
           itemsWithImages.forEach(item => {
             htmlContent += `<h3>${item.title}</h3>`;
-            htmlContent += `<img src="${item.image}" alt="${item.title}">`;
+            const imageUrl = item.image && item.image !== "No image found." ? item.image : 'https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg';
+            htmlContent += `<img src="${imageUrl}" alt="${item.title}" onerror="this.src='https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg'">`;
           });
           htmlContent += '</div>';
         }
@@ -974,11 +1299,12 @@ const BotMessage: React.FC<{
   onSuggestionClick: (suggestion: string) => void;
 }> = ({ message, onSuggestionClick }) => {
   const response = message.response;
+  const isWelcomeMessage = message.id === 1 && message.text === "Hello! I am your AI partner, Husqy. How can I help you today?";
 
   return (
     <div className="flex items-start justify-center">
       <div className="max-w-3xl w-full">
-        
+
         {/* Related Content Card Carousel */}
         {response?.related_content && response.related_content.length > 0 && (
           <RelatedContentCarousel items={response.related_content} />
@@ -986,15 +1312,15 @@ const BotMessage: React.FC<{
 
         {/* Main Answer */}
         {message.text && (
-          <div className="p-4 rounded-xl prose text-gray-800">
+          <div className="p-4 rounded-xl prose text-gray-800 chat-message-content">
             <div dangerouslySetInnerHTML={{
               __html: marked(renderIcons(renderTables(preprocessResponse(message.text), response?.tables || []))) as string
             }} />
           </div>
         )}
 
-        {/* Action Buttons */}
-        {message.text && (
+        {/* Action Buttons - Hide for welcome message */}
+        {message.text && !isWelcomeMessage && (
           <MessageActions message={message} />
         )}
 
@@ -1065,17 +1391,13 @@ const RelatedContentCarousel: React.FC<{ items: RelatedContent[] }> = ({ items }
               <span className="text-xs text-gray-500 font-medium">
                 {new URL(item.url).hostname.replace('www.', '')}
               </span>
-              {item.image && item.image !== "No image found." && (
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-20 object-cover rounded-md mb-2"
-                  onError={(e) => {
-                    console.error('Image failed to load:', item.image);
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
-                />
-              )}
+              <ImageWithFallback
+                src={item.image}
+                alt={item.title}
+                className="w-full h-20 object-cover rounded-md mb-2"
+                fallbackSrc="https://hutechsolutions.com/wp-content/uploads/2024/08/hutech-logo-1.svg"
+                fallbackAlt="Hutech Solutions"
+              />
               <h5 className="text-sm font-medium text-gray-800 line-clamp-2">{item.title}</h5>
               {item.url && (
                 <a 
@@ -1201,10 +1523,29 @@ const renderIcons = (text: string): string => {
 
 const preprocessResponse = (text: string): string => {
   let processedText = text.replace(/&nbsp;|\u00A0|\t/g, ' ');
-  processedText = processedText.replace(/([^\n])---/g, '$1\n\n---\n\n');
+
+  // Handle line breaks - convert \n to single line spacing
+  processedText = processedText.replace(/\\n/g, '\n');
+  processedText = processedText.replace(/\n\n+/g, '\n'); // Convert multiple line breaks to single
+
+  // Ensure single spacing around horizontal rules
+  processedText = processedText.replace(/([^\n])---/g, '$1\n---\n');
+
+  // Fix bullet point spacing
   processedText = processedText.replace(/^(\s*)\*\s+/gm, '$1* ');
+
+  // Add space after bullet points if missing
+  processedText = processedText.replace(/^(\s*[*]|\s*-|\s*[+])([^\s])/gm, '$1 $2');
+
+  // Fix heading spacing - single line breaks
   processedText = processedText.replace(/^(#+)(?! )/gm, '$1 ');
+
+  // Fix blockquote spacing
   processedText = processedText.replace(/^(\s*>)(?! )/gm, '$1 ');
+
+  // Ensure single line breaks between paragraphs for compact spacing
+  processedText = processedText.replace(/\n([^-*+\s\n#])/g, '\n$1');
+
   return processedText.trim();
 };
 

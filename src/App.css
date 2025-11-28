@@ -49,9 +49,52 @@
 
         /* Prose styles for markdown content */
         .prose {
-          line-height: 1.6;
-          font-size: 0.875rem;
+          line-height: 1.3;
+          font-size: 0.8rem;
           /* Smaller text for chat */
+        }
+
+        /* Enhanced chat message content formatting */
+        .chat-message-content {
+          white-space: pre-line;
+        }
+
+        .chat-message-content p {
+          margin-bottom: 0.25rem;
+          line-height: 1.3;
+        }
+
+        .chat-message-content p:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Better spacing for lists */
+        .chat-message-content ul,
+        .chat-message-content ol {
+          margin: 0.25rem 0;
+          padding-left: 1.2rem;
+        }
+
+        .chat-message-content li {
+          margin-bottom: 0.2rem;
+          line-height: 1.3;
+        }
+
+        .chat-message-content li:last-child {
+          margin-bottom: 0;
+        }
+
+        /* Proper line break handling */
+        .chat-message-content br {
+          margin-bottom: 0.1rem;
+        }
+
+        /* Nested list spacing */
+        .chat-message-content ul ul,
+        .chat-message-content ol ol,
+        .chat-message-content ul ol,
+        .chat-message-content ol ul {
+          margin: 0.1rem 0;
         }
 
         .prose img {
@@ -234,6 +277,94 @@
           transform: translateX(2px);
         }
 
+        /* Image loading and error states */
+        .card-carousel-item img {
+          transition: opacity 0.3s ease-in-out;
+          background-color: #f3f4f6;
+        }
+
+        .card-carousel-item img[src*="hutech-logo"] {
+          opacity: 0.8;
+          filter: grayscale(20%);
+        }
+
+        /* Prevent layout shift during image loading */
+        .card-carousel-item {
+          min-height: 120px;
+        }
+
+        /* COMBINED LAYOUT STYLES */
+        .app-container {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .client-page-layer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .client-page-layer.visible {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .client-page-layer.hidden {
+          opacity: 0;
+          pointer-events: none;
+          animation: clientLayerFadeOut 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes clientLayerFadeOut {
+          0% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+        }
+
+        .chat-page-layer {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .chat-page-layer.visible {
+          opacity: 1;
+          pointer-events: auto;
+          animation: chatLayerFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .chat-page-layer.hidden {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        @keyframes chatLayerFadeIn {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         /* CLIENT PAGE STYLES */
         .client-page {
           height: 100vh;
@@ -351,10 +482,10 @@
         }
 
         .welcome-title {
-          font-size: 2.5rem;
+          font-size: 1.75rem;
           font-weight: 700;
           color: #1f2937;
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
         }
 
         .ai-text {
@@ -364,8 +495,15 @@
           background-clip: text;
         }
 
+        .husqy-gradient {
+          background: linear-gradient(90deg, #1192EE 10%, #FF9D00 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
         .welcome-subtitle {
-          font-size: 1.125rem;
+          font-size: 0.9rem;
           color: #6b7280;
           margin-bottom: 0;
         }
@@ -446,17 +584,17 @@
         }
 
         .card-title {
-          font-size: 0.75rem;
+          font-size: 0.65rem;
           font-weight: 600;
           color: #1f2937;
           margin: 0 0 0.125rem 0;
         }
 
         .card-description {
-          font-size: 0.625rem;
+          font-size: 0.55rem;
           color: #6b7280;
           margin: 0;
-          line-height: 1.3;
+          line-height: 1.2;
         }
 
         .client-search-container {
@@ -872,11 +1010,11 @@
           }
 
           .welcome-title {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
           }
 
           .welcome-subtitle {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
           }
 
           .client-main {
@@ -950,7 +1088,7 @@
           }
 
           .welcome-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
           }
 
           .client-main {

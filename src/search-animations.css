@@ -1,11 +1,11 @@
 /* Modern Search Transition Animations */
 
 /* Client page transition states */
-.client-page.transitioning {
+.client-page-layer.transitioning {
   position: relative;
 }
 
-.client-page.transitioning::before {
+.client-page-layer.transitioning::before {
   content: '';
   position: absolute;
   top: 0;
@@ -26,140 +26,181 @@
   }
 }
 
-.client-page.transitioning .welcome-section {
-  animation: fadeOutUp 0.6s ease-out forwards;
+.client-page-layer.transitioning .welcome-section {
+  animation: fadeOutUp 0.4s ease-out forwards;
 }
 
-.client-page.transitioning .client-search-container.search-moving {
-  animation: searchBarMoveDown 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.client-page-layer.transitioning .client-search-container.search-moving {
+  animation: searchBarMoveDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   z-index: 1000;
 }
 
-.client-page.transitioning .question-cards-container.cards-disappearing {
-  animation: cardsDisappear 0.8s ease-out forwards;
+.client-page-layer.transitioning .question-cards-container.cards-disappearing {
+  animation: cardsDisappear 0.5s ease-out forwards;
 }
 
-/* Individual question card animations */
-.client-page.transitioning .question-card-horizontal:nth-child(odd) {
-  animation: slideOutLeft 0.8s ease-out forwards;
+/* Individual question card animations - enhanced left/right sliding */
+.client-page-layer.transitioning .question-card-horizontal:nth-child(odd) {
+  animation: slideOutLeft 0.6s ease-out forwards;
+  animation-delay: 0.05s;
+}
+
+.client-page-layer.transitioning .question-card-horizontal:nth-child(even) {
+  animation: slideOutRight 0.6s ease-out forwards;
   animation-delay: 0.1s;
 }
 
-.client-page.transitioning .question-card-horizontal:nth-child(even) {
-  animation: slideOutRight 0.8s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-/* Welcome section fade out animation */
+/* Welcome section fade out animation - enhanced */
 @keyframes fadeOutUp {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-20px) scale(0.95);
   }
   100% {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-50px) scale(0.9);
+    visibility: hidden;
   }
 }
 
-/* Question cards slide out animations */
+/* Question cards slide out animations - enhanced for dramatic effect */
 @keyframes slideOutLeft {
   0% {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateX(0) scale(1) rotate(0deg);
   }
-  50% {
-    transform: translateX(-20px) scale(0.95);
+  30% {
+    transform: translateX(-50px) scale(0.9) rotate(-5deg);
+  }
+  60% {
+    transform: translateX(-150px) scale(0.7) rotate(-10deg);
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
-    transform: translateX(-150px) scale(0.8);
+    transform: translateX(-300px) scale(0.5) rotate(-15deg);
   }
 }
 
 @keyframes slideOutRight {
   0% {
     opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateX(0) scale(1) rotate(0deg);
   }
-  50% {
-    transform: translateX(20px) scale(0.95);
+  30% {
+    transform: translateX(50px) scale(0.9) rotate(5deg);
+  }
+  60% {
+    transform: translateX(150px) scale(0.7) rotate(10deg);
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
-    transform: translateX(150px) scale(0.8);
+    transform: translateX(300px) scale(0.5) rotate(15deg);
   }
 }
 
-/* Cards container disappear */
+/* Cards container disappear - enhanced for smooth transition */
 @keyframes cardsDisappear {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
-  80% {
-    opacity: 0.2;
-    transform: translateY(20px);
+  30% {
+    opacity: 0.7;
+    transform: translateY(10px) scale(0.98);
+  }
+  60% {
+    opacity: 0.3;
+    transform: translateY(25px) scale(0.95);
+  }
+  90% {
+    opacity: 0.1;
+    transform: translateY(40px) scale(0.9);
   }
   100% {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(50px) scale(0.85);
     visibility: hidden;
   }
 }
 
-/* Search bar move down animation */
+/* Search bar move down animation - smooth disappear */
 @keyframes searchBarMoveDown {
   0% {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     width: 50%;
     max-width: 600px;
     min-width: 400px;
-    filter: blur(0px);
+    opacity: 1;
   }
   20% {
-    transform: translateY(30px) scale(1.03);
-    filter: blur(0.5px);
+    transform: translateY(40px) scale(0.98);
+    width: 48%;
+    opacity: 0.9;
   }
   40% {
-    transform: translateY(80px) scale(1.06);
-    filter: blur(1px);
+    transform: translateY(100px) scale(0.95);
+    width: 46%;
+    opacity: 0.7;
   }
   60% {
-    transform: translateY(150px) scale(1.04);
-    width: 45%;
-    max-width: 550px;
-    filter: blur(0.5px);
+    transform: translateY(180px) scale(0.9);
+    width: 44%;
+    opacity: 0.5;
   }
   80% {
-    transform: translateY(250px) scale(1.01);
+    transform: translateY(280px) scale(0.8);
     width: 42%;
-    filter: blur(0px);
+    opacity: 0.2;
+  }
+  95% {
+    transform: translateY(350px) scale(0.7);
+    width: 40%;
+    opacity: 0.1;
   }
   100% {
-    transform: translateY(300px);
-    width: 100%;
-    max-width: none;
-    min-width: auto;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    margin-left: -50%;
-    filter: blur(0px);
+    transform: translateY(400px) scale(0.6);
+    width: 50%;
+    max-width: 800px;
+    min-width: 400px;
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
 /* Chat page entrance animation */
 .page-transition-enter-active {
-  animation: chatPageSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  animation-delay: 0.4s;
+  animation: chatPageSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Instant chat page appearance for scroll trigger */
+.page-transition-instant {
+  animation: chatPageInstantIn 0.2s ease-out forwards;
   opacity: 0;
 }
 
 @keyframes chatPageSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chatPageInstantIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
@@ -168,8 +209,8 @@
 }
 
 /* Smooth search input focus animation during transition */
-.client-page.transitioning .client-search-input {
-  animation: searchInputGlow 1.2s ease-out;
+.client-page-layer.transitioning .client-search-input {
+  animation: searchInputGlow 0.8s ease-out;
 }
 
 @keyframes searchInputGlow {
@@ -186,15 +227,15 @@
 }
 
 /* Prevent interaction during transition */
-.client-page.transitioning .client-search-input,
-.client-page.transitioning .search-send-button,
-.client-page.transitioning .question-card-horizontal {
+.client-page-layer.transitioning .client-search-input,
+.client-page-layer.transitioning .search-send-button,
+.client-page-layer.transitioning .question-card-horizontal {
   pointer-events: none;
 }
 
 /* Enhance button animation during transition */
-.client-page.transitioning .search-send-button {
-  animation: buttonPulse 1.2s ease-out;
+.client-page-layer.transitioning .search-send-button {
+  animation: buttonPulse 0.8s ease-out;
 }
 
 @keyframes buttonPulse {
